@@ -2,7 +2,7 @@
     $ npm install --save-dev babel-cli
     
 # Transpile
-    babel src -d lib
+    babel src -d lib --source-maps
     Transpile all js files under src folder to lib folder
 
 # Transpile es2015 by using babel-preset-es2015

@@ -1,16 +1,10 @@
+import { Environment } from './environment.js'
+import {options, print} from "./additions.js";
+
 const defaultLine = 'Start your journey now!';
 const BR = "<br />";
 
-const print = (...args) => console.log(args[0].toUpperCase() + ": " + args[1]);
-
-var options = {
-  _intro: "You can type",
-  _options: ["left", "right", "up", "down", "help"],
-  outputOptions() {
-    this._options.forEach(f =>
-      addToOutput(this._intro + " " + f));
-  }
-};
+var environment = new Environment();
 
 function addToOutput(newLine=defaultLine) {
   let output = document.querySelector("#output");
@@ -18,14 +12,26 @@ function addToOutput(newLine=defaultLine) {
   output.innerHTML = output.innerHTML + BR + newLine;
 }
 
+function onCommand(command) {
+  if (command == "help") {
+    options.outputOptions();
+  } else if (command == "left") {
+    addToOutput(environment.stumbleUpon());
+  } else if (command == "right") {
+    addToOutput(environment.stumbleUpon());
+  } else if (command == "up") {
+    addToOutput(environment.stumbleUpon());
+  } else if (command == "down") {
+    addToOutput(environment.stumbleUpon());
+  } else {
+    addToOutput(command);
+  }
+}
+
 function onClickEnter() {
   let commands = document.querySelector("#commands");
 
-  if (commands.value == "help") {
-    options.outputOptions();
-  } else {
-    addToOutput(commands.value);
-  }
+  onCommand(commands.value)
 }
 
 function main() {
